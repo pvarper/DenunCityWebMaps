@@ -16,7 +16,10 @@ function initMap() {
         addMarker(event.latLng);
         console.log(event.latLng.lat(),event.latLng.lng());
         markersPoligon.push(new google.maps.LatLng(event.latLng.lat(),event.latLng.lng()));
-        let polygonOptions = {path: markersPoligon};
+        let polygonOptions = {
+            path: markersPoligon,
+            strokeColor: "#7CFC00",
+        };
         let polygon = new google.maps.Polygon(polygonOptions);
         polygon.setMap(map);
     });
@@ -46,10 +49,11 @@ function drawPoligon(){
     });
     polygon.setMap(map);
 }
-
+const imgicon = "/img/green.png";
 function addMarker(position) {
     const marker = new google.maps.Marker({
         position,
+        icon: imgicon,
         map,
     });
     markers.push(marker);
