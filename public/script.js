@@ -3,6 +3,8 @@
 let map;
 
 let markers = [];
+var markersPoligon;
+
 function initMap() {
     // eslint-disable-next-line no-undef
     const santacruz = {lat: -17.78629, lng: -63.18117};
@@ -11,7 +13,7 @@ function initMap() {
         zoom: 15
     });
 
-    let markersPoligon= new google.maps.MVCArray();
+    markersPoligon= new google.maps.MVCArray();
     map.addListener("click", (event) => {
         addMarker(event.latLng);
         console.log(event.latLng.lat(),event.latLng.lng());
@@ -59,7 +61,6 @@ function addMarker(position) {
 function setMapOnAll(map) {
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
-
     }
 }
 
@@ -77,6 +78,7 @@ function showMarkers() {
 function deleteMarkers() {
     hideMarkers();
     markers = [];
+    markersPoligon = [];
 }
 
 window.initMap = initMap;
