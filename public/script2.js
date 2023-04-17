@@ -3,26 +3,20 @@
 let map;
 let markers = [];
 let drawingManager;
-var selectedShape;
+var selectedShapeList = [];
 
-function clearSelection() {
-    if (selectedShape) {
-        selectedShape.setEditable(false);
-        selectedShape = null;
-    }
-}
 
 function setSelection(shape) {
-    clearSelection();
-    selectedShape = shape;
-    shape.setEditable(true);
-    //selectColor(shape.get('fillColor') || shape.get('strokeColor'));
+     selectedShapeList.push(shape);
 }
 
 function deleteSelectedShape() {
-    if (selectedShape) {
-        selectedShape.setMap(null);
+    if (selectedShapeList) {
+        for (let i = 0; i < selectedShapeList.length; i++) {
+            selectedShapeList[i].setMap(null);
+        }
     }
+
 }
 
 function setMapOnAll(map) {
