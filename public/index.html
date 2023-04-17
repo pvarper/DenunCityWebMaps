@@ -2,24 +2,18 @@
 <html lang="en">
 <head>
   <title>Add Map</title>
-
-
   <link rel="stylesheet" type="text/css" href="/style.css" />
-  <script type="module" src="/script.js"></script>
+  <script type="module" src="/script2.js"></script>
 </head>
 <body>
 <h3>My Google Maps Demo</h3>
 <!--The div element for the map -->
 <div id="floating-panel">
-  <input id="hide-markers" type="button" value="Hide Markers" />
-  <input id="show-markers" type="button" value="Show Markers" />
   <input id="delete-markers" type="button" value="Delete Markers" />
+
 </div>
 <div id="map"></div>
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgTxIfXuFWEByk3cL71ZYQlS4cpM8sgms&callback=initMap&v=weekly"
-        defer
-></script>
-
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgTxIfXuFWEByk3cL71ZYQlS4cpM8sgms&callback=initMap&libraries=drawing&v=weekly" defer></script>
 </body>
 </html>

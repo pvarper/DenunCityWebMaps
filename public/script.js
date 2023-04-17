@@ -3,7 +3,9 @@
 let map;
 
 let markers = [];
-var markersPoligon;
+let markersPoligon;
+let polygon;
+
 
 function initMap() {
     // eslint-disable-next-line no-undef
@@ -13,28 +15,14 @@ function initMap() {
         zoom: 15
     });
 
-    markersPoligon= new google.maps.MVCArray();
+     markersPoligon= new google.maps.MVCArray();
     map.addListener("click", (event) => {
-        addMarker(event.latLng);
-        console.log(event.latLng.lat(),event.latLng.lng());
         markersPoligon.push(new google.maps.LatLng(event.latLng.lat(),event.latLng.lng()));
-        let polygonOptions = {
-            path: markersPoligon,
-            strokeColor: "#7CFC00",
-        };
-        let polygon = new google.maps.Polygon(polygonOptions);
-        polygon.setMap(map);
+        addMarker(event.latLng);
+        drawPoligon();
     });
 
 
-
-    //add event listeners for the buttons
-    document
-        .getElementById("show-markers")
-        .addEventListener("click", showMarkers);
-    document
-        .getElementById("hide-markers")
-        .addEventListener("click", hideMarkers);
     document
         .getElementById("delete-markers")
         .addEventListener("click", deleteMarkers);
@@ -42,14 +30,16 @@ function initMap() {
 
 }
 
+
+
 function drawPoligon(){
-
-
-    let polygon = new google.maps.Polygon({
-        paths:  {path: markers},
-
-    });
+    let polygonOptions = {
+        path: markersPoligon,
+        strokeColor: "#7CFC00",
+    };
+    polygon = new google.maps.Polygon(polygonOptions);
     polygon.setMap(map);
+
 }
 const imgicon = "/img/green.png";
 function addMarker(position) {
@@ -68,21 +58,12 @@ function setMapOnAll(map) {
     }
 }
 
-// Removes the markers from the map, but keeps them in the array.
-function hideMarkers() {
-    setMapOnAll(null);
-}
-
-// Shows any markers currently in the array.
-function showMarkers() {
-    setMapOnAll(map);
-}
 
 // Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
-    hideMarkers();
+    setMapOnAll(null);
     markers = [];
-    markersPoligon = [];
+
 }
 
 window.initMap = initMap;
