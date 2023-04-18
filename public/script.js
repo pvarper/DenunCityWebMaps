@@ -3,7 +3,7 @@
 let map;
 
 let markers = [];
-let markersPoligon;
+let markersPoligon= [];
 let polygon;
 
 
@@ -15,9 +15,10 @@ function initMap() {
         zoom: 15
     });
 
-     markersPoligon= new google.maps.MVCArray();
+
     map.addListener("click", (event) => {
         markersPoligon.push(new google.maps.LatLng(event.latLng.lat(),event.latLng.lng()));
+        sorted_markers();
         addMarker(event.latLng);
         drawPoligon();
     });
@@ -29,9 +30,6 @@ function initMap() {
     //Adds a marker at the center of the map.
 
 }
-
-
-
 function drawPoligon(){
     let polygonOptions = {
         path: markersPoligon,
@@ -65,5 +63,6 @@ function deleteMarkers() {
     markers = [];
 
 }
+
 
 window.initMap = initMap;
